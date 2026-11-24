@@ -15,7 +15,7 @@ Turma: 12ºA2
 
 Link da Aplicação Web: https://projeto-multimedia-2026-27.onrender.com
 
-2. Visão Geral do Projeto
+1. Visão Geral do Projeto
 
 O The Blackwood Files é um site com três jogos policiais, onde o objetivo é resolver mistérios, descobrir contradições e decifrar códigos. Quis aproveitar o que aprendi em Python, HTML e CSS nas aulas para criar algo mais divertido com a ajuda da inteligência artificial. Escolhi a Proposta 1, que consistia em criar um site com três widgets interativos, baseados nos conceitos de Python lecionados, melhorados com a ajuda da IA.
 
