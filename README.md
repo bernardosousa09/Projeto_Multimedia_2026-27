@@ -25,15 +25,19 @@ Nas aulas, trabalhámos vários conceitos de Python, como variáveis, strings, l
 Utilizei o ChatGPT durante o desenvolvimento. Estes são os resumos dos principais prompts que resultaram das várias conversas que tivemos.
 
 - Prompt para conversão Web/HTML
+  
    Tenho três jogos desenvolvidos em Python para o projeto. Quero transformá-los numa única aplicação Web, The Blackwood Files. Cria uma página inicial com três widgets, um para cada jogo, que permitam aceder às suas funcionalidades, e um menu lateral de acesso. Mantém a programação em Python e liga-a ao HTML e ao CSS. Quero os três ficheiros separados, mas a funcionar em conjunto, e o código organizado para eu o conseguir compreender.
   
 - Prompt para ampliação e construção de funcionalidades
-   No Detetive X, cria nove investigações diferentes, com suspeitos, provas, interrogatórios, desafios, deduções e uma acusação final, incluindo um sistema de pontuação. Na Sala de Interrogatório, aumenta o quiz para 30 perguntas, das quais são sorteadas oito por partida, com dificuldade crescente e opção de reiniciar. Adapta o último jogo para um cenário em que se tenha de adivinhar um código constituído três algarismos; cria três níveis de dificuldade com diferentes números de tentativas.
+  
+   No Detetive , cria nove investigações diferentes, com suspeitos, provas, interrogatórios, desafios, deduções e uma acusação final, incluindo um sistema de pontuação. Na Sala de Interrogatório, aumenta o quiz para 30 perguntas, das quais são sorteadas oito por partida, com dificuldade crescente e opção de reiniciar. Adapta o último jogo para um cenário em que se tenha de adivinhar um código constituído três algarismos; cria três níveis de dificuldade com diferentes números de tentativas.
   
 - Dificuldades e erros corrigidos com a IA
+  
    Estou a ter problemas para abrir o jogo no Mac e algumas versões não funcionam como deviam. Ajuda-me a perceber os erros e a corrigi-los. Quero também melhorar a ligação entre os ficheiros e reorganizar o HTML, porque a sua pré-visualização não mostra a página corretamente.
   
 - Otimização de Layout:
+  
    Mostra-me várias ideias de design para um jogo policial. Quero uma interface bonita e simples de usar, mas não demasiado básica nem cheia de detalhes. Usa azul-escuro e dourado, fotografias dos suspeitos, cartões de provas e um menu lateral. Organiza esse menu com Início e os três jogos, coloca os títulos em português e ajusta os textos e botões que estiverem repetidos.
 
 4. Estrutura de Ficheiros do Repositório - Listagem simples dos ficheiros presentes na pasta:
