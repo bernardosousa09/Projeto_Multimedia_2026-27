@@ -45,7 +45,7 @@ Utilizei o ChatGPT durante o desenvolvimento. Estes são os resumos dos principa
 - app.py 
 - style.css 
 - README.md 
-- Assets
+- assets
 
 5. Reflexão Crítica e Aprendizagem
 
