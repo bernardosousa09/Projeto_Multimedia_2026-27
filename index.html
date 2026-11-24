@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b151d">
+  <meta name="description" content="The Blackwood Files — três jogos policiais em Python, HTML e CSS.">
+  <title>The Blackwood Files — Bernardo Sousa</title>
+  <!-- LIGAÇÃO HTML → CSS: este ficheiro funciona no Preview e no servidor Python. -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="masthead">
+      <a class="mast-brand" href="/" aria-label="Voltar ao início">
+        <img class="mansion" src="assets/header_mansion.jpg" alt="Mansão Blackwood à noite">
+        <div class="brand-text">
+          <span class="brand-title">THE BLACKWOOD FILES <em>◎</em></span>
+          <span class="brand-tag">A DETECTIVE INVESTIGATION GAME</span>
+        </div>
+      </a>
+      <!-- BARRA_CASO_INICIO -->
+      <div class="case-status">
+        <span class="case-badge">BLACKWOOD POLICE DEPARTMENT</span>
+        <div class="progress-caption">3 JOGOS DISPONÍVEIS</div>
+        <div class="progress-meter"><i style="width:0%"></i></div>
+      </div>
+      <!-- BARRA_CASO_FIM -->
+    </header>
+
+    <div class="workspace">
+      <aside class="sidebar" aria-label="Menu principal do jogo">
+        <nav class="side-nav">
+          <!-- As quatro opções principais pertencem ao HTML, não são criadas pelo Python. -->
+          <a class="side-item active" data-section="home" href="/?view=home"><span class="side-symbol">⌂</span><span>Início</span></a>
+          <a class="side-item" data-section="case" href="/?view=case"><span class="side-symbol">⌕</span><span>Detetive X</span></a>
+          <a class="side-item" data-section="quiz" href="/?view=quiz"><span class="side-symbol">◇</span><span>Sala de Interrogatório</span></a>
+          <a class="side-item" data-section="safe" href="/?view=safe"><span class="side-symbol">♧</span><span>O Cofre Trancado</span></a>
+          <!-- MENU_INTERNO_DETETIVE -->
+        </nav>
+        <div class="side-art"><div class="side-art-label">BLACKWOOD<br><small>POLICE DEPARTMENT</small></div></div>
+      </aside>
+
+      <main class="main-area" id="conteudo-principal">
+        <!-- MENSAGEM_DO_PYTHON -->
+        <!-- ECRA_INICIO -->
+        <!-- PRÉ-VISUALIZAÇÃO ESTÁTICA: o servidor Python troca esta secção pelo ecrã ativo. -->
+        <section class="page-head">
+          <div><div class="kicker">BLACKWOOD POLICE DEPARTMENT</div>
+            <h1>Painel de jogos</h1>
+            <p>Escolhe um dos três jogos para começar.</p>
+          </div>
+        </section>
+
+        <section class="home-hero">
+          <div class="home-hero-overlay">
+            <span class="eyebrow">BEM-VINDO A BLACKWOOD</span>
+            <h1>A verdade está nas <em>provas.</em></h1>
+            <p>Três jogos policiais. Uma missão: pensar como um verdadeiro detetive.</p>
+          </div>
+        </section>
+
+        <div class="section-heading"><h2>Escolhe o próximo desafio</h2><span>3 JOGOS DISPONÍVEIS</span></div>
+        <section class="games-grid" aria-label="Os três jogos">
+          <article class="game-card">
+            <div class="game-cover" style="background-image:linear-gradient(0deg,rgba(7,14,20,.92),rgba(7,14,20,.05)),url('assets/case_mansion.jpg')"></div>
+            <div class="game-content">
+              <span class="tiny-label">JOGO 01 · O JOGO PRINCIPAL</span>
+              <h2>Detetive X</h2>
+              <p>Investiga locais, analisa provas, confronta suspeitos e apresenta uma acusação fundamentada.</p>
+              <a class="btn btn-outline" href="/?view=case"><span>→</span> Jogar investigação</a>
+            </div>
+          </article>
+          <article class="game-card">
+            <div class="game-cover" style="background-image:linear-gradient(0deg,rgba(7,14,20,.92),rgba(7,14,20,.05)),url('assets/scene_security.jpg')"></div>
+            <div class="game-content">
+              <span class="tiny-label">JOGO 02 · ENCONTRA A CONTRADIÇÃO</span>
+              <h2>Sala de Interrogatório</h2>
+              <p>Oito rondas entre trinta perguntas, com dificuldade progressiva.</p>
+              <a class="btn btn-outline" href="/?view=quiz"><span>→</span> Iniciar interrogatório</a>
+            </div>
+          </article>
+          <article class="game-card">
+            <div class="game-cover" style="background-image:linear-gradient(0deg,rgba(7,14,20,.92),rgba(7,14,20,.05)),url('assets/evidence_key.jpg')"></div>
+            <div class="game-content">
+              <span class="tiny-label">JOGO 03 · DESCOBRE O CÓDIGO</span>
+              <h2>O Cofre Trancado</h2>
+              <p>Abre o cofre secreto com pistas de maior ou menor e três níveis de dificuldade.</p>
+              <a class="btn btn-outline" href="/?view=safe"><span>→</span> Abrir cofre</a>
+            </div>
+          </article>
+        </section>
+        <!-- ECRA_FIM -->
+
+        <footer class="footer">
+          <span>THE BLACKWOOD FILES · BERNARDO SOUSA</span>
+          <span>TRABALHO DE PROGRAMAÇÃO</span>
+        </footer>
+      </main>
+    </div>
+  </div>
+
+  <!-- MODELOS DOS ECRÃS: HTML real, lido pelo app.py ao construir cada jogo. -->
+  <!-- ECRÃ ACCUSE_FORM -->
+  <template id="view-accuse_form">
+<section class="panel accusation">
+  <div class="accusation-top">
+    <span class="paper-tag">BLACKWOOD POLICE DEPARTMENT</span>
+    <h2>Relatório de encerramento — [[CASE_ID]]</h2>
+    <p>Podes continuar a investigar antes de submeter. Uma acusação errada custa 15 pontos.</p>
+  </div>
+  <form method="post" action="/action">
+    <input type="hidden" name="action" value="accuse">
+    <div class="accusation-fields">
+      <label>1. Identificação do suspeito
+        <select name="suspect" required><option value="">Escolhe um suspeito</option>[[SUSPECTS]]</select>
+      </label>
+      <label>2. Motivo do crime
+        <select name="motive" required><option value="">Escolhe o motivo</option>[[MOTIVES]]</select>
+      </label>
+      <label>3. Primeira prova
+        <select name="proof1" required><option value="">Escolhe uma prova</option>[[PROOFS]]</select>
+      </label>
+      <label>4. Segunda prova
+        <select name="proof2" required><option value="">Escolhe uma prova diferente</option>[[PROOFS]]</select>
+      </label>
+    </div>
+    <button class="btn btn-gold btn-large" type="submit">⚖ Submeter acusação</button>
+  </form>
+</section>
+  </template>
+  <!-- ECRÃ ACCUSE_LOCKED -->
+  <template id="view-accuse_locked">
+<section class="panel pad locked-panel">
+  <div class="lock-ornament">⚖</div>
+  <h2>Investigação incompleta</h2>
+  <p>Precisas de encontrar pelo menos quatro provas principais e ter no dossier uma combinação coerente de duas provas. Não mostramos quais são as provas decisivas.</p>
+  <div class="requirements">
+    <span class="[[PROOF_CLASS]]">[[PROOF_MARK]] Provas principais: [[COUNT]]/4</span>
+    <span class="[[PAIR_CLASS]]">◇ Informação suficiente: [[PAIR_STATUS]]</span>
+  </div>
+  <a class="btn btn-gold" href="/?view=locations">⌕ Continuar a investigar</a>
+</section>
+  </template>
+  <!-- ECRÃ ACCUSE_SOLVED -->
+  <template id="view-accuse_solved">
+<section class="panel verdict">
+  <div class="stamp">CASO RESOLVIDO</div>
+  <h2>[[RANK]]</h2>
+  <div class="verdict-score">[[SCORE]]<small>/100 PONTOS</small></div>
+  <p>[[CONCLUSION]]</p>
+  <div class="verdict-actions">
+    <form method="post" action="/action" class="form-inline"><input type="hidden" name="action" value="new_case"><button class="btn btn-gold" type="submit">Nova investigação</button></form>
+    <a class="btn btn-outline" href="/">Voltar ao início</a>
+  </div>
+</section>
+  </template>
+  <!-- ECRÃ CASE -->
+  <template id="view-case">
+<section class="case-overview-grid">
+  <div class="panel case-feature">
+    <div class="feature-image" style="background-image:url(assets/case_mansion.jpg)"></div>
+    <div class="feature-caption">
+      <span class="tiny-label">MISSÃO ATIVA</span>
+      <h2>Descobre o que aconteceu</h2>
+      <p>Visita os locais, recolhe provas e usa-as para confrontar os quatro suspeitos. A solução exige duas provas que se confirmem entre si.</p>
+      <a class="btn btn-gold" href="/?view=locations">⌕ Explorar locais</a>
+    </div>
+  </div>
+  <div class="panel suspects-panel">
+    <div class="panel-heading"><h3>Suspeitos sob investigação</h3><span>4 PERFIS</span></div>
+    <div class="mini-suspects">[[SUSPECTS]]</div>
+  </div>
+</section>
+<div class="summary-stats">
+  <div><strong>[[PRINCIPAIS]]/6</strong><span>Provas principais</span></div>
+  <div><strong>[[SECUNDARIAS]]/2</strong><span>Pistas secundárias</span></div>
+  <div><strong>[[CONFRONTOS]]/3</strong><span>Confrontos</span></div>
+</div>
+<div class="two-cols">
+  <section class="panel pad">
+    <div class="panel-heading"><h3>Locais da investigação</h3></div>
+    [[LOCATIONS]]
+  </section>
+  <section class="panel pad">
+    <div class="panel-heading"><h3>Provas recolhidas</h3><a class="text-link" href="/?view=evidence">Ver dossier</a></div>
+    [[RECENT]]
+    <div class="case-tip">[[TIP]]</div>
+  </section>
+</div>
+  </template>
+  <!-- ECRÃ EVIDENCE -->
+  <template id="view-evidence">
+<section class="panel pad">
+  <div class="panel-heading"><h3>Elementos recolhidos</h3><span>[[COUNT]] DOCUMENTOS</span></div>
+  <div class="evidence-grid">[[CARDS]]</div>
+</section>
+<section class="panel pad deduction-panel">
+  <div class="panel-heading"><h3>Relacionar duas provas</h3><span>ANÁLISE DEDUTIVA</span></div>
+  <p>Escolhe duas provas que, em conjunto, sustentem uma conclusão concreta. As ligações corretas ficam guardadas no dossier. <strong>Uma ligação incorreta retira 2 pontos</strong> (cada par errado só é penalizado uma vez).</p>
+  [[FORM]]
+  <div class="deduction-results">[[DEDUCTIONS]]</div>
+</section>
+  </template>
+  <!-- ECRÃ INSPECT -->
+  <template id="view-inspect">
+<section class="panel inspect-card">
+  <div class="inspect-preview">
+    <div class="preview-picture"><img src="[[IMAGE]]" alt="Objeto de investigação"></div>
+    <div class="inspect-description">
+      <span class="tiny-label">[[CATEGORY]] / [[EID]]</span>
+      <h2>[[TITLE]]</h2>
+      <p>[[DESCRIPTION]]</p>
+    </div>
+  </div>
+  [[ACTION]]
+</section>
+  </template>
+  <!-- ECRÃ INTERROGATE -->
+  <template id="view-interrogate">
+<div class="interrogate-line">[[TABS]]</div>
+<div class="interrogation-columns">
+  <article class="panel profile-panel">
+    <div class="portrait-and-data">
+      <div class="portrait-frame"><img src="[[PORTRAIT]]" alt="Retrato de [[NAME]]"></div>
+      <div class="profile-id">
+        <h2>[[NAME]]</h2>
+        <span class="paper-tag">SUSPEITO</span>
+        <p>♙ <b>Função:</b> [[ROLE]]</p>
+        <p>◷ <b>Caso:</b> [[CASE_ID]]</p>
+        <p>⌑ <b>Estado:</b> A investigar</p>
+      </div>
+    </div>
+    <div class="profile-background"><h3>Informação inicial</h3><p>“[[INITIAL]]”</p></div>
+  </article>
+  <div class="interrogation-right">
+    <section class="panel dialogue-panel">
+      <div class="speaker-name">[[SPEAKER]]</div><div class="speech">“[[DIALOGUE]]”</div>
+    </section>
+    <div class="question-label"><h3>Escolhe uma pergunta</h3><i></i></div>
+    <div class="question-stack">[[QUESTIONS]]</div>
+  </div>
+</div>
+<section class="panel evidence-tray-panel">
+  <div class="panel-heading">
+    <h3>Tabuleiro de provas <span class="highlight">([[COUNT]])</span></h3>
+    <span>ESCOLHE UMA PROVA PARA APRESENTAR</span>
+  </div>
+  <form method="post" action="/action">
+    <input type="hidden" name="action" value="confront">
+    <input type="hidden" name="suspect" value="[[NAME]]">
+    <div class="tray-bottom">
+      <div class="evidence-tray">[[TRAY]]</div>
+      <button type="submit" class="btn btn-gold present-button" [[DISABLED]]>
+        <span class="present-scale">⚖</span> Apresentar prova ↗
+      </button>
+    </div>
+  </form>
+</section>
+  </template>
+  <!-- ECRÃ LOCATION_DETAIL -->
+  <template id="view-location_detail">
+<section class="panel scene-detail">
+  <div class="scene-photo" style="background-image:linear-gradient(0deg,#101b26dd,transparent 80%),url([[IMAGE]])">
+    <span class="scene-photo-label">CENA DE INVESTIGAÇÃO • [[CASE_ID]]</span>
+  </div>
+  <div class="scene-inspect">
+    <div class="panel-heading"><h3>Pontos investigáveis</h3><span>[[NUM_OBJECTS]] OBJETOS</span></div>
+    <p class="muted">Examina os elementos um de cada vez. Alguns exigem interpretação de documentos para conseguires recolher a prova.</p>
+    [[OBJECTS]]
+  </div>
+</section>
+  </template>
+  <!-- ECRÃ LOCATIONS_GRID -->
+  <template id="view-locations_grid">
+<div class="scenes-grid">[[CARDS]]</div>
+  </template>
+  <!-- ECRÃ NOTES -->
+  <template id="view-notes">
+<div class="two-cols">
+  <section class="panel pad">
+    <h3>As tuas anotações</h3>
+    <form action="/action" method="post">
+      <input type="hidden" name="action" value="save_notes">
+      <textarea class="notepad" name="notes" maxlength="4000" placeholder="Que ligações encontraste? Quais são os teus suspeitos?">[[NOTES]]</textarea>
+      <button class="btn btn-gold" type="submit">Guardar notas</button>
+    </form>
+  </section>
+  <section class="panel pad">
+    <h3>Objetivos da investigação</h3>
+    [[TASKS]]
+    <h3 class="subhead">Perguntas feitas</h3>
+    [[ASKED]]
+  </section>
+</div>
+  </template>
+  <!-- ECRÃ QUIZ_INTRO -->
+  <template id="view-quiz_intro">
+<section class="panel quiz-intro">
+  <div class="quiz-intro-image"><img src="assets/scene_security.jpg" alt="Sala de interrogatório"></div>
+  <div>
+    <span class="tiny-label">8 RONDAS · DIFICULDADE PROGRESSIVA</span>
+    <h2>Quem contradiz os factos?</h2>
+    <p>Lê a informação confirmada, escolhe o depoimento inconsistente e identifica a prova que o demonstra. São 3 rondas fáceis, 3 médias e 2 difíceis.</p>
+    <form method="post" action="/action" class="form-inline">
+      <input type="hidden" name="action" value="start_quiz">
+      <button class="btn btn-gold" type="submit">Começar interrogatório</button>
+    </form>
+  </div>
+</section>
+  </template>
+  <!-- ECRÃ QUIZ_PLAY -->
+  <template id="view-quiz_play">
+<div class="quiz-restart-bar">
+  <form method="post" action="/action" class="form-inline">
+    <input type="hidden" name="action" value="start_quiz">
+    <button class="btn btn-mini btn-muted" type="submit">↻ Reiniciar jogo</button>
+  </form>
+</div>
+<div class="quiz-layout">
+  <div class="panel pad quiz-info">
+    <div class="panel-heading"><h3>Processo de interrogatório</h3></div>
+    <div class="rounds">[[DOTS]]</div>
+    <div class="quiz-fact"><span class="tiny-label">FACTO CONFIRMADO</span><p>[[FACT]]</p></div>
+    <div class="quiz-investigation-art"><img src="assets/scene_security.jpg" alt="Ecrãs de vigilância"></div>
+    <div class="stat-strip"><strong>[[SCORE]]/80</strong><span>PONTOS ATUAIS</span></div>
+  </div>
+  <div class="panel pad quiz-questions">[[STEP]]</div>
+</div>
+  </template>
+  <!-- ECRÃ QUIZ_RESULTS -->
+  <template id="view-quiz_results">
+<section class="panel verdict">
+  <div class="stamp">RELATÓRIO DE INTERROGATÓRIO</div>
+  <h2>Resultado final</h2>
+  <div class="verdict-score">[[SCORE]]<small>/80 PONTOS</small></div>
+  <div class="quiz-results">[[RESULTS]]</div>
+  <form method="post" action="/action" class="form-inline">
+    <input type="hidden" name="action" value="start_quiz">
+    <button class="btn btn-gold" type="submit">Jogar novamente</button>
+  </form>
+</section>
+  </template>
+  <!-- ECRÃ SAFE -->
+  <template id="view-safe">
+<div class="safe-layout">
+  <section class="panel pad safe-center">
+    <div class="panel-heading"><h3>Escolhe a dificuldade</h3><span>[[COUNT]]/[[LIMIT]] TENTATIVAS</span></div>
+    <div class="level-switch">[[LEVELS]]</div>
+    <div class="safe-illustration">
+      <div class="safe-dial"><div class="dial-inner"><div class="dial-lock">♧</div><div class="dial-code">[[CODE]]</div></div></div>
+      <div class="safe-led">[[STATUS_TEXT]]</div>
+    </div>
+    [[STATUS]]
+    [[FORM]]
+    <div class="safe-actions">
+      <form method="post" action="/action" class="form-inline"><input type="hidden" name="action" value="reset_safe"><button class="btn btn-outline" type="submit">↻ Novo código</button></form>
+    </div>
+  </section>
+  <section class="panel pad safe-history">
+    <div class="panel-heading"><h3>Histórico de tentativas</h3></div>
+    <p class="muted">Depois de cada tentativa, o Python indica se o código secreto é maior ou menor.</p>
+    <div class="try-list">[[HISTORY]]</div>
+    <div class="safe-hint">ESTRATÉGIA: usa os valores intermédios para reduzir o intervalo de pesquisa.</div>
+  </section>
+</div>
+  </template>
+  <!-- ECRÃ START_CASE -->
+  <template id="view-start_case">
+<section class="panel intro-card">
+  <img src="assets/case_mansion.jpg" alt="Mansão Blackwood à noite">
+  <div>
+    <span class="tiny-label">9 INVESTIGAÇÕES POSSÍVEIS</span>
+    <h2>Recebeste um novo dossier.</h2>
+    <p>Investiga desaparecimentos, roubos e sabotagens. Explora locais pela ordem que quiseres, reúne provas e identifica o responsável.</p>
+    <form method="post" action="/action" class="form-inline">
+      <input type="hidden" name="action" value="new_case">
+      <button class="btn btn-gold" type="submit">Iniciar novo caso</button>
+    </form>
+  </div>
+</section>
+  </template>
+  <!-- ECRÃ SUSPECTS -->
+  <template id="view-suspects">
+<section class="suspects-grid">[[CARDS]]</section>
+  </template>
+</body>
+</html>
