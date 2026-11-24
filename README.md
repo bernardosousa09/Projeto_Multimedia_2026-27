@@ -7,7 +7,7 @@ Disciplina: Oficina de Multimédia - 12.º Ano - CRSI
 Ano Letivo: 2026/2027
 Autor: Bernardo Sousa
 Turma: 12ºA2
-Link da Aplicação Web: 
+Link da Aplicação Web: https://projeto-multimedia-2026-27.onrender.com
 
 1. Visão Geral do Projeto
 
